@@ -1,0 +1,343 @@
+@import url("https://fonts.googleapis.com/css?family=Edu+SA+Beginner ");
+
+* {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font-family: Edu SA Beginner;
+}
+
+.loginPage,
+.signUpPage,
+.forgotPasswordPage {
+  background-image: linear-gradient(
+    45deg,
+    rgba(95, 212, 223),
+    rgba(225, 56, 245)
+  );
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Properties for desktop and tablet view of login page media qurery@min-width: 700px to max desktop size*/
+.logInFormCard,
+.signUpFormCard,
+.forgotPasswordPageFormCard {
+  background-color: rgba(255, 255, 255, 0.85);
+  width: 500px;
+  height: 600px;
+  border-radius: 20px;
+}
+
+.cardTitle,
+.signUpCardTitle,
+.forgotPasswordCardTitle {
+  width: 100%;
+  min-width: 280px;
+  height: 50px;
+  margin: 20px 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cardTitle,
+.signUpCardTitle,
+.forgotPasswordCardTitle b {
+  font-size: 50px;
+  color: #3c3c3c;
+}
+
+.formSection {
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.divideLine {
+  width: 400px;
+  height: 2px;
+  background-color: #3c3c3cca;
+}
+
+.otherOptions {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Properties formobile view of login page,signup page , forfot password page  media qurery@min-width: 320px to max mobile size*/
+
+.logInFormCardMobile,
+.signUpFormCardMobile,
+.forgotPasswordFormCardMobile {
+  background-color: rgba(255, 255, 255, 0.85);
+  width: 280px;
+  height: 500px;
+  border-radius: 20px;
+}
+
+.cardTitleMobile,
+.signUpCardTitleMobile,
+.forgotPasswordCardTitleMobile {
+  width: 100%;
+  min-width: 280px;
+  height: 50px;
+  margin: 20px 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cardTitleMobile,
+.signUpCardTitleMobile,
+.forgotPasswordCardTitleMobile b {
+  font-size: 25px;
+  color: #3c3c3c;
+}
+
+.formSectionMobile {
+  width: 100%;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.divideLineMobile {
+  width: 200px;
+  height: 2px;
+  background-color: #3c3c3cca;
+}
+
+.otherOptionsMobile {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Properties for desktop and tablet view of signUp page *****signUpFormSection***** alone media qurery@min-width: 700px to max desktop size*/
+/* desktop and tablet view starts */
+.signUpFormSection {
+  margin: 10px 0 0 0;
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
+/* desktop and tablet view ends */
+
+/* Properties for mobile view of signUp page *****signUpFormSection***** alone media qurery@min-width: 320px to max mobile size*/
+/* mobile view starts */
+.signUpFormSectionMobile {
+  width: 100%;
+  margin: 20px 0 0 0;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+/* mobile view ends */
+
+/* Properties for  desktop and tablet view of forgotPassword page *****forgotPasswordFormSection && forgotPasswordOtherOptions*****  media qurery@min-width: 700px to max mobile size*/
+/* desktop and tablet view starts */
+.forgotPasswordFormSection {
+  width: 100%;
+  margin: 50px 0 0 0;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+.verifyOtpForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
+.forgotPasswordOtherOptions {
+  width: 100%;
+  margin: 10px 0 0 0;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* desktop and tablet view ends */
+
+/* Properties for  desktop and tablet view of forgotPassword page *****forgotPasswordFormSection && forgotPasswordOtherOptions*****  media qurery@min-width: 320px to max mobile size*/
+/* mobile view starts */
+.forgotPasswordFormSectionMobile {
+  width: 100%;
+  margin: 50px 0 0 0;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+.verifyOtpFormMobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
+.forgotPasswordOtherOptionsMobile {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* mobile view ends */
+
+/* Main page properties  */
+
+.mainPage,
+.mainPageTab {
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(98, 0, 238, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+/* ***for desktop starts*** */
+.urlForm {
+  margin: 50px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
+.historyTable {
+  display: flex;
+  width: 80%;
+  min-width: 700px;
+  height: fit-content;
+  margin: 50px 0 0 0;
+}
+table {
+  width: 100%;
+  height: fit-content;
+  min-width: 700px;
+}
+table tr th {
+  border: 2px solid rgba(98, 0, 238, 0.75);
+  height: 50px;
+  font-size: 25px;
+  border-radius: 10px;
+}
+table tr td {
+  border: 2px solid rgba(98, 0, 238, 0.75);
+  height: fit-content;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+/* ***for desktop and tablet  ends*** */
+
+/* Main page properties  */
+/* ***for tablet starts*** */
+.urlFormTab {
+  margin: 50px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.historyTableTab {
+  display: flex;
+  width: 80%;
+  min-width: 280px;
+  height: fit-content;
+  margin: 50px 0 0 0;
+}
+.historyTableTab table {
+  width: 100%;
+  height: fit-content;
+  min-width: 280px;
+}
+.historyTableTab table tr th {
+  height: 35px;
+  font-size: 15px;
+  font-weight: bolder;
+}
+.historyTableTab table tr td {
+  height: fit-content;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+/* ***for tablet ends*** */
+
+
+
+/* Main page properties  */
+/* ***for mobile starts*** */
+.mainPageMobile{
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(98, 0, 238, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:space-between;
+}
+.historyTableMobile{
+  display: flex;
+  width: 80%;
+  min-width: 280px;
+  height: fit-content;
+  margin: 50px 0 0 0;
+}
+.historyTableMobile table {
+  width: 100%;
+  height: fit-content;
+  min-width: 280px;
+}
+.historyTableMobile table tr th {
+  height: 35px;
+  font-size: 10px;
+  font-weight: bolder;
+}
+.historyTableMobile table tr td {
+  height: fit-content;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.addButton{
+  margin: 0 0 50px 0;
+ position: relative;
+ width: 100%;
+ display: flex;
+ justify-content: end;
+}
