@@ -85,8 +85,9 @@ function ForgotPassword() {
                       borderRadius: "10px",
                     }}
                   >
+                 <Link to="resetPassword">
                     <Button
-                      type="submit"
+                     
                       onClick={() => setOtpField(true)}
                       variant="contained"
                       style={{
@@ -100,6 +101,7 @@ function ForgotPassword() {
                     >
                       Verify OTP
                     </Button>
+                    </Link>
                   </Paper>
                 </form>
               )}

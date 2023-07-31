@@ -1,8 +1,9 @@
 import { Button, FormControl, Input, InputLabel, Paper } from "@mui/material";
 import { grey, pink } from "@mui/material/colors";
 import React from "react";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { IconButton } from '@mui/material';
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { IconButton } from "@mui/material";
+import { Link } from "react-router-dom";
 function Mainpagemobile() {
   const color = grey[900];
   const shortenUrl = [
@@ -34,7 +35,13 @@ function Mainpagemobile() {
           ))}
         </table>
       </Paper>
-<div className="addButton"><IconButton size="large"><AddCircleOutlineIcon sx={{ color: pink[50] }} fontSize="inherit"/></IconButton></div>
+      <div className="addButton">
+        <Link to="urlForm">
+          <IconButton size="large">
+            <AddCircleOutlineIcon sx={{ color: pink[50] }} fontSize="inherit" />
+          </IconButton>
+        </Link>
+      </div>
       {/* </Paper> */}
     </div>
   );
