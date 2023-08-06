@@ -1,16 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import { FormControl, Input, InputLabel } from "@mui/material";
 import Button from "@mui/material/Button";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { grey } from "@mui/material/colors";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import LoginpageMobile from "./Mobile view/LoginpageMobile";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 function Loginpage() {
   const pageWidth = useMediaQuery("(min-width:700px)");
-
   const color = grey[900];
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: yup.object({
+      email: yup.string().required("Email is required"),
+      password: yup.string().required("Password is required"),
+    }),
+    onSubmit: async (values) => {
+      let logInData = await fetch("http://localhost:4000/logIn", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      if (logInData.status == 200) {
+        let token = await logInData.json();
+        localStorage.setItem("authrisationToken", token.token);
+        navigate(`/mainPage/${formik.values.email}`);
+      } else {
+        setErrorMessage("Invalid Credentials");
+      }
+    },
+  });
+  if ((<Navigate replace to="/"></Navigate>)) {
+    localStorage.clear();
+  }
   return (
     <div className="loginPage">
       {pageWidth == true ? (
@@ -20,7 +50,7 @@ function Loginpage() {
             <div className="cardTitle">
               <b>Login</b>
             </div>
-            <form className="formSection">
+            <form className="formSection" onSubmit={formik.handleSubmit}>
               <FormControl
                 fullWidth
                 sx={{ m: 1, width: "400px" }}
@@ -32,8 +62,24 @@ function Loginpage() {
                 >
                   Email
                 </InputLabel>
-                <Input type="email" id="email" />
+                <Input
+                  type="email"
+                  name="email"
+                  id="email"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
               </FormControl>
+
+              {formik.values.email == "" ? (
+                formik.touched.email ? (
+                  <span style={{ color: "red" }}>Email is required</span>
+                ) : (
+                  ""
+                )
+              ) : (
+                ""
+              )}
               <FormControl
                 fullWidth
                 sx={{ m: 1, width: "400px" }}
@@ -45,29 +91,45 @@ function Loginpage() {
                 >
                   Password
                 </InputLabel>
-                <Input type="password" id="password" />
+                <Input
+                  type="password"
+                  name="password"
+                  id="password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
               </FormControl>
+              {formik.values.password == "" ? (
+                formik.touched.password ? (
+                  <span style={{ color: "red" }}>Password is required</span>
+                ) : (
+                  ""
+                )
+              ) : (
+                ""
+              )}
               <Paper
                 elevation={8}
                 style={{ width: "200px", height: "45px", borderRadius: "10px" }}
               >
-                <Link to="mainPage">
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    style={{
-                      width: "200px",
-                      height: "45px",
-                      borderRadius: "10px",
-                      fontFamily: "Edu SA Beginner",
-                      fontSize: "20px",
-                      backgroundImage: `linear-gradient(45deg, rgba(95,212,223), rgba(225,56,245))`,
-                    }}
-                  >
-                    Login
-                  </Button>
-                </Link>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  style={{
+                    width: "200px",
+                    height: "45px",
+                    borderRadius: "10px",
+                    fontFamily: "Edu SA Beginner",
+                    fontSize: "20px",
+                    backgroundImage: `linear-gradient(45deg, rgba(95,212,223), rgba(225,56,245))`,
+                  }}
+                >
+                  Login
+                </Button>
               </Paper>
+              <div style={{ color: "red", fontSize: "35px" }}>
+                {errorMessage}
+              </div>
               <div className="divideLine"></div>
             </form>
 

@@ -5,7 +5,7 @@ import Mainpage from "./Mainpage";
 import Mobileurlform from "./Mobile view/Mobileurlform";
 import Resetpassword from "./Resetpassword";
 import Signuppage from "./Signuppage";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
   return (
@@ -15,11 +15,40 @@ function App() {
         <Route path="signUp" element={<Signuppage />} />
         <Route path="forgotPassword" element={<ForgotPassword />} />
         <Route path="forgotPassword/signUp" element={<Signuppage />} />
-        <Route path="forgotPassword/resetPassword" element={<Resetpassword />} />
-        <Route path="mainPage" element={<Mainpage />} />
-        <Route path="mainPage/urlForm" element={<Mobileurlform />} />
+        <Route
+          path="forgotPassword/resetPassword"
+          element={<Resetpassword />}
+        />
+
+        <Route
+          path="mainPage/:email"
+          element={
+            <ProtectedRoute>
+              <Mainpage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="mainPage/urlForm"
+          element={
+            <ProtectedRoute>
+              <Mobileurlform />{" "}
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
+  );
+}
+
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem("authrisationToken");
+  console.log(token);
+  return token ? (
+    <section>{children}</section>
+  ) : (
+    <Navigate replace to="/"></Navigate>
   );
 }
 
