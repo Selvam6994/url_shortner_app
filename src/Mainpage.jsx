@@ -7,28 +7,71 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, redirect, useParams } from "react-router-dom";
 import Mainpagetablet from "./Tablet view/Mainpagetablet";
 import Mainpagemobile from "./Mobile view/Mainpagemobile";
+import { useFormik } from "formik";
 
 function Mainpage() {
   const color = grey[900];
   const pageWidthDesktop = useMediaQuery("(min-width:700px)");
   const pageWidthTablet = useMediaQuery("(min-width:480px)");
-  const shortenUrl = [
-    {
-      no: "01",
-      destinationUrl: "www.mechnoderamindustry.com",
-      shortenUrl: "samp.le/123 ",
-      clicks: "5",
+  const [url, setUrlData] = useState([]);
+
+  const longUrlForm = useFormik({
+    initialValues: {
+      longUrl: "",
+      email: useParams(),
+      clicks: "",
     },
-  ];
+
+    onSubmit: async (values) => {
+      let urlData = await fetch(
+        `http://localhost:4000/urlShortner/${longUrlForm.values.email.email}`,
+        {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(values),
+        }
+      );
+      if (urlData.status == 200) {
+        document.getElementById("url").value = "";
+        urlHistory();
+      }
+    },
+  });
+
+  let email = useParams();
+  const urlHistory = async () => {
+    const getResponse = await fetch(
+      `http://localhost:4000/getHistory/${email.email}`,
+      { method: "GET" }
+    );
+    const urlData = await getResponse.json();
+    setUrlData(urlData);
+  };
+  useEffect(() => {
+    urlHistory();
+  }, []);
+
+  // async function reDirect(data) {
+  //   console.log(email);
+  //   console.log(data.shortUrl);
+  //   const shortUrlLink = await fetch(data.shortUrl, { method: "GET" });
+  //   const urlData = await shortUrlLink.json();
+  //   console.log(urlData);
+  //   if (shortUrlLink.status == 200) {
+  //     setUrlRedirect(shortUrlLink.url);
+  //     urlHistory();
+  //   }
+  // }
+  // console.log(urlRedirect);
   return (
     <>
       {pageWidthDesktop == true ? (
         <div className="mainPage">
-          <form className="urlForm">
+          <form className="urlForm" onSubmit={longUrlForm.handleSubmit}>
             <FormControl
               fullWidth
               sx={{ m: 1, width: "600px" }}
@@ -45,11 +88,18 @@ function Mainpage() {
               >
                 Enter the URL
               </InputLabel>
-              <Input type="url" id="url" color="grey" />
+              <Input
+                type="url"
+                id="url"
+                color="grey"
+                name="longUrl"
+                onChange={longUrlForm.handleChange}
+              />
             </FormControl>
 
             <Button
-              onClick={() => setTableContent(true)}
+              // onClick={() => setTableContent(true)}
+              type="submit"
               variant="contained"
               style={{
                 width: "200px",
@@ -63,31 +113,36 @@ function Mainpage() {
               Shorten URL
             </Button>
           </form>
-          {/* <Paper className="historyTable" elevation={16}> */}
-          <Paper className="historyTable" elevation={16}>
-            <table>
-              <tr>
-                <th>S.No</th>
-                <th>Destination URL</th>
-                <th>Shorten URL</th>
-                <th>Clicks</th>
-              </tr>
-              {shortenUrl.map((data) => (
-                <tr>
-                  <td>{data.no}</td>
-                  <td>{data.destinationUrl}</td>
-                  <td>{data.shortenUrl}</td>
-                  <td>{data.clicks}</td>
-                </tr>
-              ))}
-            </table>
-          </Paper>
+          {/* <Paper className="historyCard" elevation={16}> */}
+
+          {url.length == 0 ? (
+            <p>No data</p>
+          ) : (
+            url.map((data) => (
+              <Paper className="historyCard" elevation={16}>
+                <div className="sNo">{url.indexOf(data) + 1}</div>
+                <div className="urls">
+                  <div>Long URL:{data.longUrl}</div>
+                  <a
+                    onClick={() => urlHistory()}
+                    href={data.shortUrl}
+                    target="_blank"
+                  >
+                    {data.shortUrl}
+                  </a>
+                </div>
+                <div className="clicks">{data.click}</div>
+              </Paper>
+            ))
+          )}
 
           {/* </Paper> */}
         </div>
+      ) : pageWidthTablet == true ? (
+        <Mainpagetablet data={url} />
       ) : (
-        pageWidthTablet==true? <Mainpagetablet />
-     :<Mainpagemobile/> )}
+        <Mainpagemobile data={url} />
+      )}
     </>
   );
 }

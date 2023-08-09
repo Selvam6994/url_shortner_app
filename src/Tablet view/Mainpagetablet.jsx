@@ -2,20 +2,13 @@ import { Button, FormControl, Input, InputLabel, Paper } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React from "react";
 
-function Mainpagetablet() {
+function Mainpagetablet({ data }) {
   const color = grey[900];
-  const shortenUrl = [
-    {
-      no: "01",
-      destinationUrl: "www.mechnoderamindustry.com",
-      shortenUrl: "samp.le/123 ",
-      clicks: "5",
-    },
-  ];
+
   return (
     <div className="mainPageTab">
       <form className="urlFormTab">
-        <FormControl fullWidth sx={{ m: 1, width: "400px" }} variant="standard">
+        <FormControl fullWidth sx={{ m: 1, width: "320px" }} variant="standard">
           <InputLabel
             htmlFor="url"
             style={{
@@ -46,24 +39,28 @@ function Mainpagetablet() {
         </Button>
       </form>
       {/* <Paper className="historyTable" elevation={16}> */}
-      <Paper className="historyTableTab" elevation={16}>
-        <table >
-          <tr>
-            <th>S.No</th>
-            <th>Destination URL</th>
-            <th>Shorten URL</th>
-            <th>Clicks</th>
-          </tr>
-          {shortenUrl.map((data) => (
-                <tr>
-                  <td>{data.no}</td>
-                  <td>{data.destinationUrl}</td>
-                  <td>{data.shortenUrl}</td>
-                  <td>{data.clicks}</td>
-                </tr>
-              ))}
-        </table>
-      </Paper>
+     
+        {data.length == 0 ? (
+          <p>No data</p>
+        ) : (
+          data.map((ele) => (
+            <Paper className="historyCardTab" elevation={16}>
+              <div className="sNoTab">{data.indexOf(ele) + 1}</div>
+              <div className="urlsTab">
+                <div>Long URL:{ele.longUrl}</div>
+                <a
+                  onClick={() => urlHistory()}
+                  href={ele.shortUrl}
+                  target="_blank"
+                >
+                  {ele.shortUrl}
+                </a>
+              </div>
+              <div className="clicksTab">{ele.click}</div>
+            </Paper>
+          ))
+        )}
+
 
       {/* </Paper> */}
     </div>

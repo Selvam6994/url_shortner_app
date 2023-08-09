@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import { FormControl, Input, InputLabel } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -8,6 +8,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import LoginpageMobile from "./Mobile view/LoginpageMobile";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { Cookie } from "@mui/icons-material";
 
 function Loginpage() {
   const pageWidth = useMediaQuery("(min-width:700px)");
@@ -26,13 +27,15 @@ function Loginpage() {
     onSubmit: async (values) => {
       let logInData = await fetch("http://localhost:4000/logIn", {
         method: "POST",
-        headers: { "Content-type": "application/json" },
+        headers: { "Content-type": "application/json" ,
+        "x-auth-managerToken": localStorage.getItem("authrisationToken"),},
         body: JSON.stringify(values),
       });
       if (logInData.status == 200) {
         let token = await logInData.json();
         localStorage.setItem("authrisationToken", token.token);
         navigate(`/mainPage/${formik.values.email}`);
+        console.log(token);
       } else {
         setErrorMessage("Invalid Credentials");
       }

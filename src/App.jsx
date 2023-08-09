@@ -25,16 +25,16 @@ function App() {
           element={
             <ProtectedRoute>
               <Mainpage />
-            </ProtectedRoute>
+              </ProtectedRoute>
           }
         />
 
         <Route
           path="mainPage/urlForm"
           element={
-            <ProtectedRoute>
-              <Mobileurlform />{" "}
-            </ProtectedRoute>
+           <ProtectedRoute>
+              <Mobileurlform />
+              </ProtectedRoute>
           }
         />
       </Routes>
