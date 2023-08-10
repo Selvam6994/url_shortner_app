@@ -14,7 +14,7 @@ function Resetpassword({ email }) {
   const pageWidth = useMediaQuery("(min-width:700px)");
   const color = grey[900];
   const [errorMsg, setErrorMessage] = useState("");
-  const navigate  = useNavigate()
+  const navigate = useNavigate();
   const updatePassword = useFormik({
     initialValues: {
       password: "",
@@ -30,13 +30,12 @@ function Resetpassword({ email }) {
       });
       if (reset.status == 200) {
         navigate("/");
-      } else  {
+      } else {
         setErrorMessage("Check the password");
       }
     },
- 
   });
-console.log(updatePassword.values)
+  console.log(updatePassword.values);
 
   return (
     <div className="resetPasswordPage">

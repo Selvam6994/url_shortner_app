@@ -45,16 +45,13 @@ function Signuppage() {
     },
 
     onSubmit: async (values) => {
-      let otpData = await fetch(
-        `${api}/signUp/otpVerification`,
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      );
+      let otpData = await fetch(`${api}/signUp/otpVerification`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
       if (otpData.status == 200) {
         setPasswordFields(true);
         setErrorMessage("");
@@ -72,16 +69,13 @@ function Signuppage() {
     },
 
     onSubmit: async (values) => {
-      let userData = await fetch(
-        `${api}/signUp/${formik.values.email}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      );
+      let userData = await fetch(`${api}/signUp/${formik.values.email}`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
       if (userData.status == 200) {
         navigate("/");
         setErrorMessage("");
@@ -332,4 +326,3 @@ function Signuppage() {
 }
 
 export default Signuppage;
-

@@ -27,8 +27,10 @@ function Loginpage() {
     onSubmit: async (values) => {
       let logInData = await fetch(`${api}/logIn`, {
         method: "POST",
-        headers: { "Content-type": "application/json" ,
-        "x-auth-managerToken": localStorage.getItem("authrisationToken"),},
+        headers: {
+          "Content-type": "application/json",
+          "x-auth-managerToken": localStorage.getItem("authrisationToken"),
+        },
         body: JSON.stringify(values),
       });
       if (logInData.status == 200) {

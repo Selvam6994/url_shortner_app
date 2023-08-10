@@ -15,7 +15,7 @@ function ForgotPassword() {
   const color = grey[900];
   const [otpField, setOtpField] = useState(false);
   const [passwordFields, setPasswordFields] = useState(false);
-  const [errorMessage,setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("");
   const forgotPassword = useFormik({
     initialValues: {
       email: "",
@@ -44,18 +44,15 @@ function ForgotPassword() {
     },
 
     onSubmit: async (values) => {
-      let otpData = await fetch(
-        `${api}/forgotPassword/otpVerification `,
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      );
+      let otpData = await fetch(`${api}/forgotPassword/otpVerification `, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
       if (otpData.status == 200) {
-        setPasswordFields(true)
+        setPasswordFields(true);
         document.getElementById("otp").value = "";
       } else if (otpData.status == 400) {
         setErrorMessage("OTP does not match");
@@ -127,7 +124,10 @@ function ForgotPassword() {
                 </form>
               ) : (
                 <div className="forgotPasswordFormSection">
-                  <form className="verifyOtpForm" onSubmit={otpVerification.handleSubmit}>
+                  <form
+                    className="verifyOtpForm"
+                    onSubmit={otpVerification.handleSubmit}
+                  >
                     <FormControl
                       fullWidth
                       sx={{ m: 1, width: "400px" }}
@@ -142,7 +142,12 @@ function ForgotPassword() {
                       >
                         OTP
                       </InputLabel>
-                      <Input type="number" id="otp" name="otp" onChange={otpVerification.handleChange} />
+                      <Input
+                        type="number"
+                        id="otp"
+                        name="otp"
+                        onChange={otpVerification.handleChange}
+                      />
                     </FormControl>
                     <Paper
                       elevation={8}
@@ -153,7 +158,7 @@ function ForgotPassword() {
                       }}
                     >
                       <Button
-                      type="submit"
+                        type="submit"
                         variant="contained"
                         style={{
                           width: "200px",

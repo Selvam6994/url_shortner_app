@@ -1,3 +1,3 @@
-const api ="https://url-backend-beta.vercel.app";
+const api = "https://url-shortner-backend-94oe.onrender.com";
 
 export default api;
