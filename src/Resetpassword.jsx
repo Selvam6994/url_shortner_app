@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import { FormControl, Input, InputLabel } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -6,10 +6,37 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { grey } from "@mui/material/colors";
 import SignuppageMobile from "./Mobile view/SignuppageMobile";
 import Resetpasswordmobile from "./Mobile view/Resetpasswordmobile";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 
-function Resetpassword() {
+function Resetpassword({ email }) {
   const pageWidth = useMediaQuery("(min-width:700px)");
   const color = grey[900];
+  const [errorMsg, setErrorMessage] = useState("");
+  const navigate  = useNavigate()
+  const updatePassword = useFormik({
+    initialValues: {
+      password: "",
+      confirmPassword: "",
+    },
+    onSubmit: async (values) => {
+      let reset = await fetch(`http://localhost:4000/${email}/resetPassword`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      if (reset.status == 200) {
+        navigate("/");
+      } else  {
+        setErrorMessage("Check the password");
+      }
+    },
+ 
+  });
+console.log(updatePassword.values)
+
   return (
     <div className="resetPasswordPage">
       {pageWidth == true ? (
@@ -19,10 +46,13 @@ function Resetpassword() {
             <div className="resetCardTitle">
               <b>Reset Password</b>
             </div>
-            <form className="resetFormSection">
+            <form
+              className="resetFormSection"
+              onSubmit={updatePassword.handleSubmit}
+            >
               {/* email text field starts*/}
-             
-              <span>abcd@gmail.com</span> 
+
+              <span>{email}</span>
               {/* email text field ends*/}
               {/* new password text field starts*/}
               <FormControl
@@ -36,7 +66,12 @@ function Resetpassword() {
                 >
                   New Password
                 </InputLabel>
-                <Input type="password" id="newPassword" />
+                <Input
+                  type="password"
+                  id="newPassword"
+                  name="password"
+                  onChange={updatePassword.handleChange}
+                />
               </FormControl>
               {/* new password text field ends*/}
               {/* confirm password text field starts*/}
@@ -51,7 +86,12 @@ function Resetpassword() {
                 >
                   Confirm Password
                 </InputLabel>
-                <Input type="password" id="confirmPassword" />
+                <Input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  onChange={updatePassword.handleChange}
+                />
               </FormControl>
 
               {/* confirm password text field ends*/}

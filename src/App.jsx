@@ -15,10 +15,10 @@ function App() {
         <Route path="signUp" element={<Signuppage />} />
         <Route path="forgotPassword" element={<ForgotPassword />} />
         <Route path="forgotPassword/signUp" element={<Signuppage />} />
-        <Route
+        {/* <Route
           path="forgotPassword/resetPassword"
           element={<Resetpassword />}
-        />
+        /> */}
 
         <Route
           path="mainPage/:email"
