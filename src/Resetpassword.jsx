@@ -8,6 +8,7 @@ import SignuppageMobile from "./Mobile view/SignuppageMobile";
 import Resetpasswordmobile from "./Mobile view/Resetpasswordmobile";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import api from "./global";
 
 function Resetpassword({ email }) {
   const pageWidth = useMediaQuery("(min-width:700px)");
@@ -20,7 +21,7 @@ function Resetpassword({ email }) {
       confirmPassword: "",
     },
     onSubmit: async (values) => {
-      let reset = await fetch(`http://localhost:4000/${email}/resetPassword`, {
+      let reset = await fetch(`${api}/${email}/resetPassword`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",

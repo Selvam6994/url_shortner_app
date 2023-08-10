@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import ForgotpasswordMobile from "./Mobile view/ForgotpasswordMobile";
 import { useFormik } from "formik";
 import Resetpassword from "./Resetpassword";
+import api from "./global";
 
 function ForgotPassword() {
   const pageWidth = useMediaQuery("(min-width:700px)");
@@ -20,7 +21,7 @@ function ForgotPassword() {
       email: "",
     },
     onSubmit: async (values) => {
-      let signUpData = await fetch("http://localhost:4000/forgotPassword", {
+      let signUpData = await fetch(`${api}/forgotPassword`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -44,7 +45,7 @@ function ForgotPassword() {
 
     onSubmit: async (values) => {
       let otpData = await fetch(
-        "http://localhost:4000/forgotPassword/otpVerification",
+        `${api}/forgotPassword/otpVerification `,
         {
           method: "POST",
           headers: {

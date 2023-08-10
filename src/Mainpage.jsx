@@ -12,6 +12,7 @@ import { Link, redirect, useParams } from "react-router-dom";
 import Mainpagetablet from "./Tablet view/Mainpagetablet";
 import Mainpagemobile from "./Mobile view/Mainpagemobile";
 import { useFormik } from "formik";
+import api from "./global";
 
 function Mainpage() {
   const color = grey[900];
@@ -28,7 +29,7 @@ function Mainpage() {
 
     onSubmit: async (values) => {
       let urlData = await fetch(
-        `http://localhost:4000/urlShortner/${longUrlForm.values.email.email}`,
+        `${api}/urlShortner/${longUrlForm.values.email.email}`,
         {
           method: "POST",
           headers: { "Content-type": "application/json" },
@@ -44,10 +45,9 @@ function Mainpage() {
 
   let email = useParams();
   const urlHistory = async () => {
-    const getResponse = await fetch(
-      `http://localhost:4000/getHistory/${email.email}`,
-      { method: "GET" }
-    );
+    const getResponse = await fetch(`${api}/getHistory/${email.email}`, {
+      method: "GET",
+    });
     const urlData = await getResponse.json();
     setUrlData(urlData);
   };
@@ -55,18 +55,6 @@ function Mainpage() {
     urlHistory();
   }, []);
 
-  // async function reDirect(data) {
-  //   console.log(email);
-  //   console.log(data.shortUrl);
-  //   const shortUrlLink = await fetch(data.shortUrl, { method: "GET" });
-  //   const urlData = await shortUrlLink.json();
-  //   console.log(urlData);
-  //   if (shortUrlLink.status == 200) {
-  //     setUrlRedirect(shortUrlLink.url);
-  //     urlHistory();
-  //   }
-  // }
-  // console.log(urlRedirect);
   return (
     <>
       {pageWidthDesktop == true ? (

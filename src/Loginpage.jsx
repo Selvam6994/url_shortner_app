@@ -8,7 +8,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import LoginpageMobile from "./Mobile view/LoginpageMobile";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Cookie } from "@mui/icons-material";
+import api from "./global";
 
 function Loginpage() {
   const pageWidth = useMediaQuery("(min-width:700px)");
@@ -25,7 +25,7 @@ function Loginpage() {
       password: yup.string().required("Password is required"),
     }),
     onSubmit: async (values) => {
-      let logInData = await fetch("http://localhost:4000/logIn", {
+      let logInData = await fetch(`${api}/logIn`, {
         method: "POST",
         headers: { "Content-type": "application/json" ,
         "x-auth-managerToken": localStorage.getItem("authrisationToken"),},

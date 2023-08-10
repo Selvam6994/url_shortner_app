@@ -7,6 +7,7 @@ import { grey } from "@mui/material/colors";
 import SignuppageMobile from "./Mobile view/SignuppageMobile";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import api from "./global";
 
 function Signuppage() {
   const pageWidth = useMediaQuery("(min-width:700px)");
@@ -22,7 +23,7 @@ function Signuppage() {
       email: "",
     },
     onSubmit: async (values) => {
-      let signUpData = await fetch("http://localhost:4000/signUp", {
+      let signUpData = await fetch(`${api}/signUp`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -45,7 +46,7 @@ function Signuppage() {
 
     onSubmit: async (values) => {
       let otpData = await fetch(
-        "http://localhost:4000/signUp/otpVerification",
+        `${api}/signUp/otpVerification`,
         {
           method: "POST",
           headers: {
@@ -72,7 +73,7 @@ function Signuppage() {
 
     onSubmit: async (values) => {
       let userData = await fetch(
-        `http://localhost:4000/signUp/${formik.values.email}`,
+        `${api}/signUp/${formik.values.email}`,
         {
           method: "POST",
           headers: {
@@ -332,32 +333,3 @@ function Signuppage() {
 
 export default Signuppage;
 
-{
-  /* new password text field ends*/
-}
-{
-  /* confirm password text field starts*/
-}
-{
-  /* <FormControl
-                    fullWidth
-                    sx={{ m: 1, width: "400px" }}
-                    variant="standard"
-                  >
-                    <InputLabel
-                      htmlFor="confirmPassword"
-                      style={{
-                        fontFamily: "Edu SA Beginner",
-                        fontSize: "20px",
-                      }}
-                    >
-                      Confirm Password
-                    </InputLabel>
-                    <Input
-                      type="password"
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      onChange={formik.handleChange}
-                    />
-                  </FormControl> */
-}
