@@ -10,7 +10,6 @@ import { grey } from "@mui/material/colors";
 import React, { useEffect, useState } from "react";
 import { Link, redirect, useParams } from "react-router-dom";
 import Mainpagetablet from "./Tablet view/Mainpagetablet";
-import Mainpagemobile from "./Mobile view/Mainpagemobile";
 import { useFormik } from "formik";
 import api from "./global";
 
